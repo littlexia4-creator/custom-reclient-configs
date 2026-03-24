@@ -212,11 +212,12 @@ class ReclientConfigurator:
             clang_remote_wrapper_template).substitute(template_vars)
 
         # Write the clang remote wrapper.
+        wrapper_path = (f'{Paths.src_dir}/buildtools/reclient_cfgs/'
+                        'chromium-browser-clang/clang_remote_wrapper')
         if self.args.verbose:
-            print(f'Writing {Paths.src_dir}/buildtools/reclient_cfgs/chromium-browser-clang/clang_remote_wrapper')
-        FileUtils.write_text_file(
-            (f'{Paths.src_dir}/buildtools/reclient_cfgs/chromium-browser-clang/'
-             'clang_remote_wrapper'), clang_remote_wrapper)
+            print(f'Writing {wrapper_path}')
+        FileUtils.write_text_file(wrapper_path, clang_remote_wrapper)
+        os.chmod(wrapper_path, 0o755)
 
     def generate_reproxy_cfg(self):
         # Load Chromium config template and remove everything starting with $

@@ -42,6 +42,11 @@ if [[ -d $clang_include_dir && ! -d $linux_clang_include_dir ]]; then
   ln -sr "$clang_include_dir" "$linux_clang_include_dir"
 fi
 
+# # Remote workers don't have ccache, so skip it and shift args.
+# if [[ "$1" == "ccache" || "$1" == */ccache ]]; then
+#   shift
+# fi
+
 # Convert clang binary path to the linux version.
 linux_clang_binary="$1"
 linux_clang_binary="${linux_clang_binary//\\//}"
